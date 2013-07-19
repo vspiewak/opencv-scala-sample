@@ -13,12 +13,12 @@ import org.opencv.objdetect.CascadeClassifier;
 //
 class DetectFaceDemo {
   public void run() {
-    System.out.println("\nRunning DetectFaceDemo");
+    System.out.println("Running DetectFaceDemo");
 
     // Create a face detector from the cascade file in the resources
     // directory.
-    CascadeClassifier faceDetector = new CascadeClassifier(getClass().getResource("/lbpcascade_frontalface.xml").getPath());
-    Mat image = Highgui.imread(getClass().getResource("/lena.png").getPath());
+    CascadeClassifier faceDetector = new CascadeClassifier(getClass().getResource("/classifiers/haarcascades/haarcascade_frontalface_alt_tree.xml").getPath());
+    Mat image = Highgui.imread(getClass().getResource("/inputs/torvald.jpg").getPath());
 
     // Detect faces in the image.
     // MatOfRect is a special container class for Rect.
@@ -41,8 +41,6 @@ class DetectFaceDemo {
 
 public class HelloOpenCV {
   public static void main(String[] args) {
-    System.out.println("Hello, OpenCV");
-
     // Load the native library.
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     new DetectFaceDemo().run();
