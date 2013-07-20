@@ -15,17 +15,22 @@ public class WebcamDemo {
 			System.out.println("Webcam not found :(");
 		} else {
 			System.out.println("Found Webcam: " + cap);
+      try {
+			System.out.println("Wait a bit, Webcam start");
+      Thread.sleep(2000);
+      } catch(InterruptedException ie) {
+      }
 		}
 		
 		Mat frame = new Mat();
-		cap.retrieve(frame);
-		
+		cap.read(frame);
 		Highgui.imwrite("webcam.jpg", frame);
+
 		Mat frameBlur = new Mat();
-		Imgproc.blur(frame, frameBlur, new Size(5, 5));
+		Imgproc.blur(frame, frameBlur, new Size(10, 10));
 		Highgui.imwrite("webcam-blurred.jpg", frameBlur);
 		
-		Imgproc.GaussianBlur(frame, frameBlur, new Size(25, 25), 10);
+		Imgproc.GaussianBlur(frame, frameBlur, new Size(25, 25), 30);
 		Highgui.imwrite("webcam-gaussian.jpg", frameBlur);
 		
 		cap.release();
