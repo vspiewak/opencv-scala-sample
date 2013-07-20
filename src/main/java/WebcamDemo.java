@@ -4,6 +4,9 @@ import org.opencv.highgui.Highgui;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 
+import javax.swing.*;
+import java.awt.*;
+
 
 public class WebcamDemo {
 
@@ -16,7 +19,7 @@ public class WebcamDemo {
         } else {
             System.out.println("Found Webcam: " + cap);
             try {
-                System.out.println("Wait a bit, Webcam start");
+                System.out.println("Waiting a bit, Webcam starting");
                 Thread.sleep(2000);
             } catch (InterruptedException ie) {
             }
@@ -24,6 +27,7 @@ public class WebcamDemo {
 
         Mat frame = new Mat();
         cap.read(frame);
+
         Highgui.imwrite("webcam.jpg", frame);
 
         Mat frameBlur = new Mat();
@@ -33,7 +37,20 @@ public class WebcamDemo {
         Imgproc.GaussianBlur(frame, frameBlur, new Size(25, 25), 30);
         Highgui.imwrite("webcam-gaussian.jpg", frameBlur);
 
-        cap.release();
+
+        JFrame jframe = new JFrame("Webcam");
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        WebcamPanel panel = new WebcamPanel(cap, 10);
+
+        jframe.setLayout(new BorderLayout());
+        jframe.add(panel, BorderLayout.CENTER);
+        jframe.setSize(frame.width(), frame.height());
+        jframe.setVisible(true);
+        jframe.setLocationRelativeTo(null);
+
+        panel.run();
 
     }
+
 }
