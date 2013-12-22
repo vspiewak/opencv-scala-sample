@@ -17,11 +17,17 @@ public class WebcamDemo {
         if (!cap.isOpened()) {
             System.out.println("Webcam not found :(");
         } else {
+
             System.out.println("Found Webcam: " + cap);
+
+            boolean open = cap.open(0);
+            System.out.println("Webcam.open returned: " + open);
+
+            System.out.println("Waiting a bit, Webcam starting");
             try {
-                System.out.println("Waiting a bit, Webcam starting");
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
         }
 

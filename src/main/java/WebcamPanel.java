@@ -28,7 +28,7 @@ public class WebcamPanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        while (true) {
+        while (cap.isOpened()) {
 
             try {
 
